@@ -1,0 +1,963 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Holtwood+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Holtwood+One+SC&family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Workbench&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.background {
+    position: absolute;
+    z-index: -2;
+    display: grid;
+    grid-template-rows: 24.5vh 51vh 24.5vh;
+    grid-template-columns: 37.5vw 25vw 37.5vw;
+    background-color: black;
+}
+
+.background-blur {
+    transition: filter 2s ease;
+    filter: blur(3px);
+}
+
+.background-register {
+    filter: blur(4px);
+}
+
+.background-circle1 {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    width: 25vw;
+    height: 51vh;
+    justify-self: center;
+    align-self: center;
+    border: 3px solid rgb(0, 157, 255);
+    clip-path: circle(50% at center);
+    animation: circle1-rotate 3s cubic-bezier(0.5,0.5,0.5,0.5) infinite, circle1-size 2s ease-in-out;
+}
+
+@keyframes circle1-size {
+    0% {
+        width: 0vw;
+        height: 0vh;
+    }
+    100% {
+        width: 25vw;
+        height: 51vh;
+    }
+}
+
+@keyframes circle1-rotate {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.background-circle1-click {
+    animation: circle1-rotate 3s cubic-bezier(0.5,0.5,0.5,0.5) infinite, shrink-size 2s cubic-bezier(0.5,0.5,0.5,0.5);
+}
+
+@keyframes shrink-size {
+    0% {
+        width: 25vw;
+        height: 51vh;  
+    }
+    100% {
+        width: 0vw;
+        height: 0vh;  
+    }
+}
+
+.background-circle1-pause-animation {
+    width: 0vw;
+    height: 0vh;
+    border: none;
+    animation-play-state: paused, paused;
+}
+
+.background-circle2 {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    border: 3px solid rgb(4, 0, 255);
+    clip-path: circle(50% at center);
+    width: 18vw;
+    height: 36vh;
+    justify-self: center;
+    align-self: center;
+    animation: circle2-rotate 3s cubic-bezier(0.5,0.5,0.5,0.5) infinite, circle2-size 2s ease-in-out;
+}
+
+@keyframes circle2-size {
+    0% {
+        width: 0vw;
+        height: 0vh;
+    }
+    100% {
+        width: 18vw;
+        height: 36vh;
+    }
+}
+
+@keyframes circle2-rotate {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(-360deg);
+    }
+}
+
+.background-circle2-click {
+    animation: circle2-rotate 3s cubic-bezier(0.5,0.5,0.5,0.5) infinite, shrink-size-2 2s cubic-bezier(0.5,0.5,0.5,0.5);
+}
+
+@keyframes shrink-size-2 {
+    0% {
+        width: 18vw;
+        height: 36vh;  
+    }
+    100% {
+        width: 0vw;
+        height: 0vh;  
+    }
+}
+
+.background-circle2-pause-animation {
+    width: 0vw;
+    height: 0vh;
+    border: none;
+    animation-play-state: paused, paused;
+}
+
+
+
+.background-circle3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    color: White;
+    width: 10vw;
+    height: 15vh;
+    font-size: 40px;
+    font-family: "Holtwood One SC", serif;
+    font-weight: 300;
+    text-shadow: 0px 0px 15px blue;
+    font-style: normal;
+    justify-self: center;
+    align-self: center;
+    letter-spacing: 1px;
+    animation: circle3-size 2s ease-in-out;
+}
+
+@keyframes circle3-size {
+    0% {
+        width: 0vw;
+        height: 0vh;
+        font-size: 0px;
+    }
+    100% {
+        width: 10vw;
+        height: 15vh;
+        font-size: 40px;
+    }
+}
+
+.background-circle3-click {
+    animation: shrink-size-3 2s cubic-bezier(0.5,0.5,0.5,0.5);
+}
+
+@keyframes shrink-size-3 {
+    0% {
+        width: 10vw;
+        height: 15vh;
+        font-size: 40px;
+    }
+    100% {
+        width: 0vw;
+        height: 0vh;
+        font-size: 0px;
+    }
+}
+
+.background-circle3-pause-animation {
+    width: 0vw;
+    height: 0vh;
+    font-size: 0px;
+    border: none;
+    animation-play-state: paused;
+}
+
+.form-submit-alert {
+    width: 100vw;
+    height: 7vh;
+    display: grid;
+    overflow: hidden;
+    grid-template-columns: 95vw 5vw;
+    grid-template-rows: 7vh;
+    background-color: rgb(4, 0, 255);
+    animation: form-submit-alert-height 0.5s ease;
+}
+
+.form-submit-alert-zero-height {
+    animation: form-submit-alert-zero-height 0.5s ease;
+}
+
+
+.form-submit-alert-left-span {
+    grid-column: 1/2;
+    justify-self: center;
+    color: aliceblue;
+    align-self: center;
+    font-size: 13px;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.form-submit-alert-right-span {
+    display: flex;
+    grid-column: 2/3;
+    justify-self: center;
+    align-self: center;
+}
+
+.form-submit-alert-right-span-button {
+    color: aliceblue;
+    background-color: rgba(240, 248, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes form-submit-alert-height {
+    0% {
+        height: 0vh;
+    }
+    100% {
+        height: 7vh;
+    }
+}
+
+@keyframes form-submit-alert-zero-height {
+    0% {
+        height: 7vh;
+    }
+    100% {
+        height: 0vh;
+    }
+}
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.home-container-top-shift {
+    top: 7vh;
+    animation: main-top-shift 0.5s ease;
+}
+
+@keyframes main-top-shift {
+    0% {
+        top: 0vh;
+    }
+    100% {
+        top: 7vh;
+    }
+}
+
+.home-container-bottom-shift {
+    top: 0vh;
+    animation: main-bottom-shift 0.5 ease;
+}
+
+@keyframes main-bottom-shift {
+    0% {
+        top: 7vh;
+    }
+    100% {
+        top: 0vh;
+    }
+}
+
+.left-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55vw;
+    height: 12vh;
+    box-shadow: 0px 2px 20px 4px black;
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    background-color: rgb(255, 255, 255);
+    border-bottom-right-radius: 5px;
+    transform: skewX(20deg);
+    z-index: 1;
+    animation: left-right 2s ease-in-out;
+}
+
+@keyframes left-right {
+    0% {
+        left: -55vw;
+    }
+    100% {
+        left: -10px;
+    }
+}
+
+.left-navbar-return {
+    animation: left-navbar-right-left 2s ease-in-out;
+}
+
+@keyframes left-navbar-right-left {
+    0% {
+        left: -10px;
+    }
+    100% {
+        left: -55vw;
+    }
+}
+
+.left-navbar-return-pause {
+    left: -55vw;
+    animation-play-state: paused;
+}
+
+.span-left-navbar {
+    transform: skewX(-20deg);
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    font-family: "Workbench", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: larger;
+    font-style: normal;
+    font-variation-settings:
+      "BLED" 0,
+      "SCAN" 0;
+    color: rgb(4, 0, 255);
+}
+
+.right-navbar {
+    width: 55vw;
+    height: 10vh;
+    border-bottom-left-radius: 5px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    justify-content: flex-end;
+    transform: skewX(20deg);
+    background-color: rgb(0, 157, 255);
+    z-index: 0;
+    animation: right-left 2s ease-in-out;
+}
+
+@keyframes right-left {
+    0% {
+        right: -55vw;
+    }
+    100% {
+        right: -10px;
+    }
+}
+
+.right-navbar-return {
+    animation: right-navbar-right-left 2s ease-in-out;
+}
+
+@keyframes right-navbar-right-left {
+    0% {
+        right: -10px;
+    }
+    100% {
+        right: -55vw;
+    }
+}
+
+.right-navbar-return-pause {
+    right: -55vw;
+    animation-play-state: paused;
+}
+
+.button-right-navbar {
+    text-align: center;
+    width: 74px;
+    height: 20px;
+    background-color: rgb(0, 157, 255);
+    border: none;
+    text-decoration: none;
+    position: absolute;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    right: 25px;
+    display: inline-block;
+    transform: skewX(-20deg);
+    transition: all 0.5s ease;
+}
+
+.button-right-navbar:hover {
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.609);
+    border-radius: 4px;
+}
+
+.button-right-navbar-verify {
+    text-align: center;
+    width: 74px;
+    height: 20px;
+    background-color: rgb(0, 157, 255);
+    border: none;
+    text-decoration: none;
+    position: absolute;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    opacity: 1;
+    right: 110px;
+    display: inline-block;
+    transform: skewX(-20deg);
+    transition: all 0.5s ease;
+    animation: verify-button-opacity 3s ease;
+}
+
+@keyframes verify-button-opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.button-right-navbar-verify:hover {
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.609);
+    border-radius: 4px;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 0vw;
+    height: 60vh;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #2d2d54c5;
+}
+
+.registration-form-transition {
+    box-shadow: 0px 0px 10px 6px rgb(187, 187, 187);
+    animation: registration-form-transition 2s ease-in-out;
+}
+
+.registration-form-transition-shrink {
+    box-shadow: 0px 0px 10px 6px rgb(187, 187, 187);
+    animation: registration-form-transition-shrink 2s ease-in-out;
+}
+
+.registration-form-transition-paused {
+    width: 30vw;
+}
+
+.registration-form-transition-shrink-paused {
+    width: 0vw;
+}
+
+@keyframes registration-form-transition {
+    0% {
+        width: 0vw; 
+    }
+    100% {
+        width: 30vw; 
+    }
+}
+
+@keyframes registration-form-transition-shrink {
+    0% {
+        width: 30vw; 
+    }
+    100% {
+        width: 0vw; 
+    }
+}
+
+
+
+.input-form {
+    position: relative;
+    width: 20vw;
+    height: 5vh;
+    background-color: #30304400;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid white;
+    padding-bottom: 2px;
+    color:rgb(255, 255, 255);
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 200;
+    overflow: hidden;
+    font-style: normal;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.color-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-input-form-color {
+    position: absolute;
+    z-index: 2;
+    width: 19vw;
+    height: 20vh;
+    top: 7vh;
+    background-color: rgba(0, 0, 0, 0.612);
+    border-radius: 8px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 4.5vw 4.5vw 4.5vw 4.5vw;
+    grid-template-rows: 10vh 10vh;
+}
+
+.choose-color {
+    width: 3.5vw;
+    height: 5vh;
+    border-radius: 5px;
+    justify-self: center;
+    align-self: center;
+}
+
+.input-form-name:hover {
+    padding-bottom: 5px;
+}
+
+.input-form-email:hover {
+    padding-bottom: 5px;
+}
+
+.input-form-color:hover {
+    padding-bottom: 5px;
+}
+
+.input-form-password:hover {
+    padding-bottom: 5px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-input-form-password {
+    position: absolute;
+    z-index: 3;
+    width: 25vw;
+    height: 14vh;
+    top: 7vh;
+    background-color: rgba(0, 0, 0, 0.612);
+    border-radius: 8px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: 3vw 3vw 3vw 3vw 3vw 3vw 3vw 3vw;
+    grid-template-rows: 5vh 5vh 3vh;
+    font-family: "Racing Sans One", sans-serif;
+    font-size: 12px;
+}
+
+.dropdown-input-form-password, a {
+    text-decoration: none;
+}
+
+.symbol, button {
+    display: flex;
+    width: 2.5vw;
+    height: 4vh;
+    border-color: rgba(0, 0, 139, 0);
+    border-radius: 5px;
+    justify-self: center;
+    align-self: center;
+    background-color: rgba(255, 255, 255, 0.356);
+    color: aliceblue;
+    font-family: "Racing Sans One", sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 3/4;
+    grid-column: 1/9;
+}
+
+.clear-symbol-button {
+    width: 5vw;
+    height: 2.5vh;
+    background-color: rgba(255, 255, 255, 0.356);
+    color: aliceblue;
+    border: 0px solid rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    border-radius: 5px;
+}
+
+.button-form-submit {
+    display: flex;
+    width: 7vw;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgba(0, 0, 0, 0.167);
+    color: rgb(0, 157, 255);
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.button-form-submit:hover {
+    background-color: rgba(240, 248, 255, 0.537);
+    color:rgb(10, 0, 121)
+}
+
+.verification-home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.verification-input-container {
+    width: 0vw;
+    height: 27vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.verification-input-container-expand {
+    box-shadow: 0px 0px 10px 6px rgb(187, 187, 187);
+    animation: verification-input-container-expand 2s ease-in-out;
+}
+
+.verification-input-container-expand-paused {
+    width: 50vw;
+}
+
+.verification-input-container-shrink {
+    box-shadow: 0px 0px 10px 6px rgb(187, 187, 187);
+    animation: verification-input-container-shrink 2s ease-in-out;
+}
+
+.verification-input-container-shrink-paused {
+    width: 0vw;
+}
+
+
+@keyframes verification-input-container-expand {
+    0% {
+        width: 0vw;
+    }
+    100% {
+        width: 50vw;
+    }
+}
+
+@keyframes verification-input-container-shrink {
+    0% {
+        width: 50vw;
+    }
+    100% {
+        width: 0vw;
+    }
+}
+
+.verification-form {
+    width: 50vw;
+    height: 9vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #2d2d54c5;
+}
+
+.verification-text {
+    width: 50vw;
+    height: 9vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 200;
+    background-color: #2d2d54c5;
+}
+
+.verification-form-submit {
+    width: 50vw;
+    height: 9vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 200;
+    background-color: #2d2d54c5;
+}
+
+.verification-button-submit {
+    width: 9vw;
+    height: 4vh;
+    background-color: rgba(0, 255, 255, 0);
+    transition: all 0.2s ease-in-out;
+}
+
+.verification-button-submit:hover {
+    background-color: grey;
+}
+
+.verification-form-input {
+    text-align: center;
+    width: 30vw;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: rgba(255, 235, 205, 0);
+    color: aliceblue;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 200;
+    outline: none;
+}
+
+.table-login-container {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 0vw;
+    height: 60vh;
+    background-color: #2d2d5400;
+    grid-template-columns: repeat(8, 7.5vw);
+    grid-template-rows: repeat(6, 10vh);                                                     
+}
+
+.table-login-container-expand {
+    box-shadow: 0px 0px 10px 6px rgb(187, 187, 187);
+    animation: table-login-container-expand 2s ease-in-out;
+}
+
+.table-login-container-expand-paused {
+    width: 60vw;
+}
+
+.table-login-container-shrink {
+    box-shadow: 0px 0px 10px 6px rgb(187, 187, 187);
+    animation: table-login-container-shrink 2s ease-in-out;
+}
+
+.table-login-container-shrink-paused {
+    width: 0vw;
+    box-shadow: none;
+}
+
+@keyframes table-login-container-expand {
+    0% {
+        width: 0vw;
+    }
+    100% {
+        width: 60vw;
+    }
+}
+
+@keyframes table-login-container-shrink {
+    0% {
+        width: 60vw;
+    }
+    100% {
+        width: 0vw;
+    }
+}
+
+.grid-row1{
+    background-color: rgba(0, 4, 255, 0.273);
+    display: flex;
+    color: white;
+    width: 6.7vw;
+    height: 8.5vh;
+    gap: 2px 2px;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    border-radius: 5px;
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+}
+
+.grid-row2{
+    background-color: rgba(0, 187, 255, 0.273);
+    display: flex;
+    color: white;
+    width: 6.7vw;
+    height: 8.5vh;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    border-radius: 5px;
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+}
+
+.grid-row3 {
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    color: white;
+    border-radius: 5px;
+    align-self: center;
+    justify-self: center;
+    width: 6.7vw;
+    height: 8.5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-row-button1 {
+    grid-row: 4/5;
+    grid-column: 1/3;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-row-button2 {
+    grid-row: 4/5;
+    grid-column: 3/5;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-row-button3 {
+    grid-row: 4/5;
+    grid-column: 5/7;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-row-button4 {
+    grid-row: 4/5;
+    grid-column: 7/9;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-row-input {
+    grid-row: 5/6;
+    grid-column: 1/9;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-row-submit {
+    grid-row: 6/7;
+    grid-column: 1/9;
+    align-self: center;
+    justify-self: center;
+}
+
+.button {
+    letter-spacing: 1.5px;
+    width: 8vw;
+    height: 5vh;
+    border-radius: 3px;
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgb(49, 49, 49);
+    transition: all 0.1s ease-in;
+}
+
+.left:hover {
+    background-color: rgb(174, 0, 255);
+}
+
+.up:hover {
+    background-color: rgb(255, 60, 0);
+}
+
+.down:hover {
+    background-color: rgb(255, 196, 0);
+}
+
+.right:hover {
+    background-color: rgb(255, 0, 166);
+}
+
+.submit:hover {
+    background-color: rgb(0, 21, 255);
+}
+
+.password-text {
+    text-align: center;
+    width: 30vw;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: rgba(255, 235, 205, 0);
+    color: aliceblue;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 200;
+    outline: none;
+}
+
+
+

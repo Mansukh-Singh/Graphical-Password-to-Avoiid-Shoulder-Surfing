@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title id='title' name="login" page="">Home</title>
+</head>
+
+<body>
+
+    <div id="background" class="background">
+        <div id="background-circle1" class="background-circle1"></div>
+        <div id="background-circle2" class="background-circle2"></div>
+        <div id="background-circle3" class="background-circle3">GP</div>
+    </div>
+    <div id="home-container" class="home-container" home-title="LOGIN PHASE">
+        <div id="left-navbar" class="left-navbar"><span id="span-left-navbar"></span></div>
+        <div id="right-navbar" class="right-navbar">
+            <button id="home-button" class="button-right-navbar">Home</button>
+        </div>
+        <form id="myform" action="/login/" method="post">
+            {% csrf_token %}
+            <div id="table-login-container" class="table-login-container" special-characters="{{special_characters}}"
+                alphabets="{{alphabets}}" colors="{{colors}}" ids="{{ids}}" register-color="{{register_color}}">
+                {% for special_character in special_characters %}
+                <div class="grid-row1">{{special_character}}</div>
+                {% endfor %}
+                {% for alphabet in alphabets %}
+                <div class="grid-row2">{{alphabet}}</div>
+                {% endfor %}
+                {% for color in colors %}
+                <div class="grid-row3"></div>
+                {% endfor %}
+                <div id="left-button" class="grid-row-button1">
+                    <button type="button" class="button left">LEFT</button>
+                </div>
+                <div id="up-button" class="grid-row-button2">
+                    <button type="button" class="button up">UP</button>
+                </div>
+                <div id="down-button" class="grid-row-button3">
+                    <button type="button" class="button down">DOWN</button>
+                </div>
+                <div id="right-button" class="grid-row-button4">
+                    <button type="button" class="button right">RIGHT</button>
+                </div>
+                <div class="grid-row-input">
+                    <input type="password" id="password-text" class="password-text" name="password"
+                        placeholder="PASSWORD">
+                </div>
+                <div class="grid-row-submit">
+                    <button type="submit" class="button submit">SUBMIT</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'login_script.js' %}"></script>
+    <script>
+        var input_password = "{{ password }}";
+        var register_password = "{{ register_password }}";
+        $(document).on('submit', '#myform', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "login" %}',
+                data:
+                {
+                    password: $("#password-text").val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function (response) {
+                    if (response.split("<script>")[1].split(";")[0].split('"')[1] == register_password) {
+                        table_login_container.classList.add("table-login-container-shrink")
+                        background_circle1.className += " background-circle1-click"
+                        background_circle2.className += " background-circle2-click"
+                        background_circle3.className += " background-circle3-click"
+                        left_navbar.className += " left-navbar-return"
+                        right_navbar.className += " right-navbar-return"
+                        function animation_pause() {
+                            return new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    resolve()
+                                }, 2000)
+                            })
+                        }
+
+                        (async function () {
+                            await animation_pause()
+                            table_login_container.classList.add("table-login-container-shrink-paused")
+                            background_circle1.className += " background-circle1-pause-animation"
+                            background_circle2.className += " background-circle2-pause-animation"
+                            background_circle3.className += " background-circle3-pause-animation"
+                            left_navbar.className += " left-navbar-return-pause"
+                            right_navbar.className += " right-navbar-return-pause"
+                            window.location.href = "/dashboard"
+                        })()
+                    }
+                    else {
+                        alert("Incorrect password")
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            })
+        }); 
+    </script>
+</body>
+
+</html>

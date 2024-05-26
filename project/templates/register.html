@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title id='title' name="register" page="">Registration</title>
+</head>
+
+<body>
+    <div id="background" class="background">
+        <div id="background-circle1" class="background-circle1"></div>
+        <div id="background-circle2" class="background-circle2"></div>
+        <div id="background-circle3" class="background-circle3">GP</div>
+    </div>
+    <div id="home-container" class="home-container" home-title="REGISTRATION PHASE">
+        <div id="left-navbar" class="left-navbar"><span id="span-left-navbar"></span></div>
+        <div id="right-navbar" class="right-navbar">
+            <button id="home-button" class="button-right-navbar">Home</button>
+        </div>
+        <form id="myform" action="/register/" method="post">
+            {% csrf_token %}
+            <div id="registration-form" class="registration-form">
+                <input type="text" id="input-form-name" name="input-form-name" class="input-form input-form-name"
+                    placeholder="Name" required>
+                <input type="text" id="input-form-email" name="input-form-email" class="input-form input-form-email"
+                    placeholder="Email ID" required>
+                <div class="color-container">
+                    <input type="text" id="input-form-color" class="input-form input-form-color" name="input-form-color"
+                        placeholder="Choose a color" required>
+                    <div id="dropdown-input-form-color" class="dropdown-input-form-color" style="visibility: hidden">
+                        <div id="red-color" value="ff0000" class="choose-color red-color"
+                            style="background-color: #ff0000;"></div>
+                        <div id="blue-color" value="0000ff" class="choose-color blue-color"
+                            style="background-color: #0000ff;"></div>
+                        <div id="yellow-color" value="ffff00" class="choose-color yellow-color"
+                            style="background-color: #ffff00;"></div>
+                        <div id="green-color" value="008000" class="choose-color green-color"
+                            style="background-color: #008000;"></div>
+                        <div id="pink-color" value="ffc0cb" class="choose-color pink-color"
+                            style="background-color: #ffc0cb;"></div>
+                        <div id="voilet-color" value="ee82ee" class="choose-color voilet-color"
+                            style="background-color: #ee82ee;"></div>
+                        <div id="orange-color" value="ffa500" class="choose-color orange-color"
+                            style="background-color: #ffa500;"></div>
+                        <div id="skyblue-color" value="87ceeb" class="choose-color skyblue-color"
+                            style="background-color: #87ceeb"></div>
+                    </div>
+                </div>
+                <div class="password-container">
+                    <input type="text" id="input-form-password" class="input-form input-form-password"
+                        name="input-form-password" placeholder="Enter 6 digit password">
+                    <div id="dropdown-input-form-password" class="dropdown-input-form-password"
+                        style="visibility: hidden">
+                        <div id="!" value="!" class="symbol !"><button type="button">!</button></div>
+                        <div id="@" value="@" class="symbol @"><button type="button">@</button></div>
+                        <div id="#" value="#" class="symbol #"><button type="button">#</button></div>
+                        <div id="$" value="$" class="symbol $"><button type="button">$</button></div>
+                        <div id="%" value="%" class="symbol %"><button type="button">%</button></div>
+                        <div id="^" value="^" class="symbol ^"><button type="button">^</button></div>
+                        <div id="&" value="~" class="symbol &"><button type="button">~</button></div>
+                        <div id="*" value="*" class="symbol *"><button type="button">*</button></div>
+                        <div id="A" value="A" class="symbol A"><button type="button">A</button></div>
+                        <div id="B" value="B" class="symbol B"><button type="button">B</button></div>
+                        <div id="C" value="C" class="symbol C"><button type="button">C</button></div>
+                        <div id="D" value="D" class="symbol D"><button type="button">D</button></div>
+                        <div id="E" value="E" class="symbol E"><button type="button">E</button></div>
+                        <div id="F" value="F" class="symbol F"><button type="button">F</button></div>
+                        <div id="G" value="G" class="symbol G"><button type="button">G</button></div>
+                        <div id="H" value="H" class="symbol H"><button type="button">H</button></div>
+                        <div id="clear-symbol" class="clear-symbol"><button type="button" id="clear-symbol-button"
+                                class="clear-symbol-button">clear</button></div>
+                    </div>
+                </div>
+                <!-- <input type="text" id="input-form-password" class="input-form input-form-password"
+                    placeholder="Password" disabled> -->
+                <button type="submit" id="button-form-submit" class="button-form-submit">submit</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'register_script.js' %}"></script>
+    <script>
+        $(document).on('submit', '#myform', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "register" %}',
+                data:
+                {
+                    name: $("#input-form-name").val(),
+                    email_id: $("#input-form-email").val(),
+                    color: $("#input-form-color").val(),
+                    password: $("#input-form-password").val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function () {
+                    document.getElementById('input-form-name').value = ""
+                    document.getElementById('input-form-email').value = ""
+                    document.getElementById('input-form-color').value = ""
+                    document.getElementById('input-form-password').value = ""
+                    let registration_form = document.getElementById('registration-form')
+                    let right_navbar = document.getElementById('right-navbar')
+                    let button_right_navbar_verify = document.createElement('button')
+                    button_right_navbar_verify.className = "button-right-navbar-verify"
+                    button_right_navbar_verify.id = "verify-button"
+                    button_right_navbar_verify.innerText = "Verify"
+                    right_navbar.append(button_right_navbar_verify)
+                    document.getElementById('verify-button').addEventListener('click', () => {
+                        // registration_form.classList.remove("registration-form-transition")
+                        // registration_form.classList.remove("registration-form-transition-paused")
+                        registration_form.classList.add("registration-form-transition-shrink")
+                        background_circle1.className += " background-circle1-click"
+                        background_circle2.className += " background-circle2-click"
+                        background_circle3.className += " background-circle3-click"
+                        left_navbar.className += " left-navbar-return"
+                        right_navbar.className += " right-navbar-return"
+                        function animation_pause() {
+                            return new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    resolve()
+                                }, 2000)
+                            })
+                        }
+                        (async function () {
+                            await animation_pause()
+                            registration_form.classList.add("registration-form-transition-shrink-paused")
+                            registration_form.classList.remove("registration-form-transition")
+                            registration_form.classList.remove("registration-form-transition-paused")
+                            background_circle1.className += " background-circle1-pause-animation"
+                            background_circle2.className += " background-circle2-pause-animation"
+                            background_circle3.className += " background-circle3-pause-animation"
+                            left_navbar.className += " left-navbar-return-pause"
+                            right_navbar.className += " right-navbar-return-pause"
+                            window.location.href = "/verify"
+                        })()
+                    })
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            })
+        }); 
+    </script>
+</body>
+
+</html>

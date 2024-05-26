@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title id='title' name="verify" page="">Verification</title>
+</head>
+
+<body>
+
+    <div id="background" class="background">
+        <div id="background-circle1" class="background-circle1"></div>
+        <div id="background-circle2" class="background-circle2"></div>
+        <div id="background-circle3" class="background-circle3">GP</div>
+    </div>
+    <div id="home-container" class="home-container" home-title="VERIFICATION PHASE">
+        <div id="left-navbar" class="left-navbar"><span id="span-left-navbar"></span></div>
+        <div id="right-navbar" class="right-navbar">
+            <button id="home-button" class="button-right-navbar">Home</button>
+        </div>
+        <div class="verification-home-container">
+            <form id="myform" action="/verify/" method="post">
+                {% csrf_token %}
+                <div id="verification-input-container" class="verification-input-container">
+                    <div class="verification-text">
+                        ENTER YOUR EMAIL ADDRESS TO VERIFY
+                    </div>
+                    <div id="verification-form" class="verification-form">
+                        <input type="email" name="email" id="verification-form-input" class="verification-form-input"
+                            placeholder="Enter you email address">
+                    </div>
+                    <div class="verification-form-submit">
+                        <button type="submit" class="verification-button-submit">submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'verify_script.js' %}"></script>
+    <script>
+        var email_id = "{{ email_id }}";
+        var email_address = "{{ email_address }}";
+        $(document).on('submit', '#myform', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "verify" %}',
+                data:
+                {
+                    email: $("#verification-form-input").val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function (response) {
+                    if (response.split(";")[1].split('"')[1] == email_id) {
+                        let verification_input_container = document.getElementById("verification-input-container")
+                        verification_input_container.classList.add("verification-input-container-shrink")
+                        background_circle1.className += " background-circle1-click"
+                        background_circle2.className += " background-circle2-click"
+                        background_circle3.className += " background-circle3-click"
+                        left_navbar.className += " left-navbar-return"
+                        right_navbar.className += " right-navbar-return"
+                        function animation_pause() {
+                            return new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    resolve()
+                                }, 2000)
+                            })
+                        }
+                        (async function () {
+                            await animation_pause()
+                            background_circle1.className += " background-circle1-pause-animation"
+                            background_circle2.className += " background-circle2-pause-animation"
+                            background_circle3.className += " background-circle3-pause-animation"
+                            verification_input_container.classList.add("verification-input-container-shrink-paused")
+                            left_navbar.className += " left-navbar-return-pause"
+                            right_navbar.className += " right-navbar-return-pause"
+                            window.location.href = "/login"
+                        })()
+                    }
+                    else if (response.split(";")[1].split('"')[1] == "") {
+                        alert("Input cannot be empty")
+                    }
+
+                    else {
+                        alert("Email ID does not exists")
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            })
+        }); 
+    </script>
+</body>
+
+</html>

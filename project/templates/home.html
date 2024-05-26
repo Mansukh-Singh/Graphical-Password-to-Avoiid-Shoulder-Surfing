@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title id='title' name="home" page="register">Home</title>
+</head>
+
+<body>
+
+    <div class="background">
+        <div id="background-circle1" class="background-circle1"></div>
+        <div id="background-circle2" class="background-circle2"></div>
+        <div id="background-circle3" class="background-circle3">GP</div>
+    </div>
+    <div id="home-container" class="home-container" home-title="GRAPHICAL PASSWORD">
+        <div id="left-navbar" class="left-navbar"><span id="span-left-navbar"></span></div>
+        <div id="right-navbar" class="right-navbar">
+            <button id="home-button" class="button-right-navbar">Register</button>
+        </div>
+    </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>
